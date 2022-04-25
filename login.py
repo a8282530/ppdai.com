@@ -55,6 +55,7 @@ def rsaDecrypt(key: str, content: str) -> str:
 
 def login(user: str, pwd: str):
     url = 'https://passport.ppdai.com/api/passport/versionService/webConfig?appid=1000002866&sourceType=1'
+    userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
     headers = {
         "Cache-Control": "no-cache",
         "Content-Type": "application/json;charset=UTF-8",
@@ -62,7 +63,7 @@ def login(user: str, pwd: str):
         "Origin": "https://account.ppdai.com",
         "Pragma": "no-cache",
         "Referer": "https://account.ppdai.com/",
-        "User-Agent": "Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Mobile Safari/537.36"
+        "User-Agent": userAgent
     }
     try:
         with Session() as http:
@@ -81,7 +82,7 @@ def login(user: str, pwd: str):
                     "_ppdaiWaterMark": "",
                     "FromUrl": "",
                     "UniqueId": "",
-                    "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
+                    "UserAgent": userAgent,
                     "sourceId": 'null',
                     "serial_no": serial_no,
                     "currentUrl": "https://account.ppdai.com/pc/login",
@@ -104,5 +105,5 @@ def login(user: str, pwd: str):
 
 
 if __name__ == '__main__':
-    result = login('phone@qq.com', '123456')
+    result = login('phone@paipaidai.com', '123456')
     print(result)
