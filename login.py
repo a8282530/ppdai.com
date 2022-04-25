@@ -20,16 +20,6 @@ def setPublicKey(keys: str) -> str:
     return k
 
 
-def setPrivateKey(keys: str) -> str:
-    head = '-----BEGIN PUBLIC KEY-----'
-    end = '-----END PUBLIC KEY-----'
-    l: int = 64
-    n: int = math.ceil(len(keys) / l)
-    k: str = '\n'.join([keys[i * l:(i + 1) * l] for i in range(n)])
-    k = f'{head}\n{k}\n{end}'
-    return k
-
-
 def rsaEncrypt(key: str, content: str) -> str:
     """
     ras 加密[公钥加密]
@@ -44,13 +34,6 @@ def rsaEncrypt(key: str, content: str) -> str:
     result = base64.b64encode(encrypt_bytes)
     result = str(result, encoding='utf-8')
     return result
-
-
-def rsaDecrypt(key: str, content: str) -> str:
-    private_key = setPrivateKey(key)
-    cipher = PKCS1_v1_5.new(RSA.import_key(private_key))
-    back_text = cipher.decrypt(base64.b64decode(content), 0)
-    return back_text.decode('utf-8')
 
 
 def login(user: str, pwd: str):
